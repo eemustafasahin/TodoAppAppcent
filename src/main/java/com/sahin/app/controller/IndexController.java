@@ -15,23 +15,21 @@ import javax.servlet.http.HttpServletResponse;
 public class IndexController {
 
     private final HttpServletResponse m_httpServletResponse;
-    private final UserService m_userService;
 
-    public IndexController(HttpServletResponse httpServletResponse, UserService userService)
+    public IndexController(HttpServletResponse httpServletResponse)
     {
         m_httpServletResponse = httpServletResponse;
-        m_userService = userService;
     }
 
     @GetMapping(path = "/")
     public void home() throws Exception
     {
-        m_httpServletResponse.sendRedirect("http://localhost:8080/swagger-ui.html");
+        m_httpServletResponse.sendRedirect("/swagger-ui.html");
     }
 
     @GetMapping(path = "/doc")
     public void docPage() throws Exception
     {
-        m_httpServletResponse.sendRedirect("http://localhost:8080/swagger-ui.html");
+        m_httpServletResponse.sendRedirect("/swagger-ui.html");
     }
 }
