@@ -36,19 +36,16 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private UserRole userRole;
-
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
-    private Set<Todo> todolist = new HashSet<>();
-
-
-    //...
-
     private Boolean locked = true;
 
     private Boolean enabled = true;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private UserRole userRole = UserRole.USER_ROLE;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+    private Set<Todo> todos = new HashSet<>();
 
     public User()
     {
@@ -74,6 +71,25 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    //helper methods
+    public void addTodo(Todo todo)
+    {
+        todos.add(todo);
+        todo.setUser(this);
+    }
+
+    public void removeTodo(Todo todo)
+    {
+        todo.setUser(null);
+        todos.remove(todo);
+    }
+
+    public void removeTodos()
+    {
+        todos.forEach(this::removeTodo);
+    }
+
+    //getters,setters
     public Long getId()
     {
         return id;
@@ -176,6 +192,36 @@ public class User implements UserDetails {
     public boolean isEnabled()
     {
         return true;
+    }
+
+
+    //equals,hashCode,toString
+    @Override
+    public boolean equals(Object object)
+    {
+        if (this == object)
+            return true;
+
+        if (null == object)
+            return false;
+
+        if (this.getClass() != object.getClass())
+            return false;
+
+        return id != null && id.equals(((User)object).id);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 2022;
+    }
+
+    @Override
+    public String toString()
+    {
+        return String.format("User { id : %s, name : firstname : '%s', lastname = '%s', " +
+                "username = '%s', email : '%s'}",getId(),getFirstname(),getLastname(),getUsername(),getEmail());
     }
 
 }

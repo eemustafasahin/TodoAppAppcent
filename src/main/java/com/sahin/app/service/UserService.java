@@ -42,7 +42,6 @@ public class UserService implements UserDetailsService {
         if (userExists)
             throw new IllegalStateException("Email is already taken.");
 
-        user.setUserRole(UserRole.USER_ROLE);
         user.setPassword(m_passwordEncoder.encode(user.getPassword()));
         m_userRepository.save(user);
 

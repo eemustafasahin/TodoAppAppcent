@@ -25,7 +25,7 @@ public class RegistrationController {
     @PostMapping
     public User register(@RequestBody RegistrationDTO request)
     {
-        return m_registrationService.register(request);
+        return m_registrationService.registerWithUserRole(request);
     }
 
 }

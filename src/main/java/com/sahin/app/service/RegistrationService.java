@@ -2,6 +2,7 @@ package com.sahin.app.service;
 
 import com.sahin.app.dto.RegistrationDTO;
 import com.sahin.app.model.User;
+import com.sahin.app.model.UserRole;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +13,14 @@ import org.springframework.stereotype.Service;
 public class RegistrationService {
 
     private final UserService m_userService;
-    private final BCryptPasswordEncoder m_passwordEncoder;
 
-    public RegistrationService(UserService userService, BCryptPasswordEncoder passwordEncoder)
+    public RegistrationService(UserService userService)
     {
         m_userService = userService;
-
-        m_passwordEncoder = passwordEncoder;
     }
 
-    public User register(RegistrationDTO request)
+    public User registerWithUserRole(RegistrationDTO request)
     {
-
         return  m_userService.signUpUser(new User(
                 request.getFirstName(),
                 request.getLastName(),
@@ -32,4 +29,9 @@ public class RegistrationService {
                 request.getPassword()));
 
     }
+    public User registerWithAdminRole(User user)
+    {
+        return  m_userService.signUpUser(user);
+    }
+
 }
