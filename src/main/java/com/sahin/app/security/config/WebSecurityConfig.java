@@ -26,17 +26,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         m_passwordEncoder = passwordEncoder;
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v*/registration/**")
+                .antMatchers("/api/v*/*/**")
+                .permitAll()
+                .antMatchers("/*")
                 .permitAll()
                 .anyRequest()
                 .authenticated().and()
-                .formLogin();
+                .formLogin().defaultSuccessUrl("/doc");
     }
 
     @Override

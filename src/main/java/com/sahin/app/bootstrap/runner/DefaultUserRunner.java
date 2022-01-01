@@ -1,6 +1,7 @@
 package com.sahin.app.bootstrap.runner;
 
-import com.sahin.app.service.RegistrationService;
+import com.sahin.app.bootstrap.UserFactory;
+import com.sahin.app.service.AuthenticationService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
@@ -11,16 +12,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultUserRunner implements ApplicationRunner {
 
-    private final RegistrationService m_registrationService;
+    private final AuthenticationService m_authenticationService;
 
-    public DefaultUserRunner(RegistrationService registrationService)
+    public DefaultUserRunner(AuthenticationService authenticationService)
     {
-        m_registrationService = registrationService;
+        m_authenticationService = authenticationService;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception
     {
-        m_registrationService.registerWithAdminRole(UserFactory.create());
+        m_authenticationService.registerWithAdminRole(UserFactory.create());
     }
 }

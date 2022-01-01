@@ -1,4 +1,4 @@
-package com.sahin.app.model;
+package com.sahin.app.data.model;
 
 import javax.persistence.*;
 import java.util.Set;

@@ -1,13 +1,12 @@
 package com.sahin.app.controller;
 
-import com.sahin.app.model.User;
-import com.sahin.app.repository.IUserRepository;
+import com.sahin.app.dto.UserDTO;
+import com.sahin.app.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by M.Şahin on 01/01/2022
@@ -16,16 +15,22 @@ import java.util.stream.Collectors;
 @RequestMapping("api/v1/users")
 public class UserController {
 
-    private final IUserRepository m_userRepository;
+    private final UserService m_userService;
 
-    public UserController(IUserRepository userRepository)
+    public UserController(UserService userService)
     {
-        m_userRepository = userRepository;
+        m_userService = userService;
+    }
+
+    @GetMapping(path = "/me")
+    public Object getCurrentUser()
+    {
+        return m_userService.getCurrentUser();
     }
 
     @GetMapping("/all")
-    public List<User> getAllUsers()
+    public List<UserDTO> getAllUsers()
     {
-        return m_userRepository.findAll().stream().collect(Collectors.toList());
+        return m_userService.findAllUsers();
     }
 }

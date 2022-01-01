@@ -1,7 +1,7 @@
-package com.sahin.app.bootstrap.runner;
+package com.sahin.app.bootstrap;
 
-import com.sahin.app.model.User;
-import com.sahin.app.model.UserRole;
+import com.sahin.app.data.model.User;
+import com.sahin.app.data.model.UserRole;
 
 /**
  * Created by M.Şahin on 01/01/2022

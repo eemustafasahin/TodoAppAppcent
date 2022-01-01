@@ -1,4 +1,4 @@
-package com.sahin.app.model;
+package com.sahin.app.data.model;
 
 /**
  * Created by M.Şahin on 01/01/2022

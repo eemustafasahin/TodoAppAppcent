@@ -1,4 +1,4 @@
-package com.sahin.app.model;
+package com.sahin.app.data.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

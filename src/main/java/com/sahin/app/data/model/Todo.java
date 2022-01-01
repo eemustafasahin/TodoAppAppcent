@@ -1,9 +1,6 @@
-package com.sahin.app.model;
-
-import com.sun.xml.bind.v2.TODO;
+package com.sahin.app.data.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
