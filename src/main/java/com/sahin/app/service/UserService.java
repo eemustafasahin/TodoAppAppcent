@@ -4,6 +4,7 @@ import com.sahin.app.data.model.User;
 import com.sahin.app.data.repository.IUserRepository;
 import com.sahin.app.dto.UserDTO;
 import com.sahin.app.dto.UserDTOConverter;
+import com.sahin.app.payload.ApiDataResponse;
 import com.sahin.app.payload.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.nio.file.attribute.UserPrincipal;
 import java.security.Principal;
 import java.util.List;
@@ -47,7 +49,7 @@ public class UserService implements UserDetailsService {
                         String.format(exceptionMsg,usernameOrEmail)));
     }
 
-    public ApiResponse signUpUser(User user)
+    public ApiDataResponse<UserDTO> saveUser(User user)
     {
         boolean userExists = m_userRepository.existsByEmail(user.getEmail());
 
@@ -55,9 +57,9 @@ public class UserService implements UserDetailsService {
             throw new IllegalStateException("Email is already taken."); //wrap api response here
 
         user.setPassword(m_passwordEncoder.encode(user.getPassword()));
-        m_userRepository.save(user);
+        var userSaved = m_userRepository.save(user);
 
-        return new ApiResponse(Boolean.TRUE,"Successfully registered", HttpStatus.OK);
+        return new ApiDataResponse<>(m_userDTOConverter.toUserDTO(userSaved),Boolean.TRUE,"Successfully registered", HttpStatus.OK);
     }
 
     public List<UserDTO> findAllUsers()

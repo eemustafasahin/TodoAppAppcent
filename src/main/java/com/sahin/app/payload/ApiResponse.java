@@ -13,9 +13,14 @@ import org.springframework.http.HttpStatus;
 })
 public class ApiResponse {
 
-    private final Boolean m_success;
-    private final String m_message;
+    private Boolean m_success;
+    private String m_message;
     private HttpStatus m_httpStatus;
+
+    public ApiResponse()
+    {
+
+    }
 
     public ApiResponse(Boolean success, String message)
     {

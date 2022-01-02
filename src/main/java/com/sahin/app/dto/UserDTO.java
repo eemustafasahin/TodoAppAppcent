@@ -1,5 +1,7 @@
 package com.sahin.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by M.Şahin on 01/01/2022
  */
@@ -9,6 +11,8 @@ public class UserDTO {
     private String m_firstname;
     private String m_lastname;
     private String m_email;
+    private String m_password;
+
 
     public Long getId()
     {
@@ -58,5 +62,16 @@ public class UserDTO {
     public void setEmail(String email)
     {
         m_email = email;
+    }
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    public String getPassword()
+    {
+        return m_password;
+    }
+
+    public void setPassword(String password)
+    {
+        m_password = password;
     }
 }

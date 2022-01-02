@@ -1,8 +1,7 @@
 package com.sahin.app.controller;
 
-import com.sahin.app.data.model.User;
-import com.sahin.app.payload.ApiResponse;
-import com.sahin.app.payload.SignupRequest;
+import com.sahin.app.dto.UserDTO;
+import com.sahin.app.payload.ApiDataResponse;
 import com.sahin.app.service.AuthenticationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +26,11 @@ public class AuthenticationController {
     }
 
     @PostMapping(path = "/signup")
-    public ResponseEntity<ApiResponse> register(@RequestBody SignupRequest request)
+    public ResponseEntity<ApiDataResponse<UserDTO>> register(@RequestBody UserDTO userDTO)
     {
-        var apiResponse = m_authenticationService.registerWithUserRole(request);
+        var apiDataResponse = m_authenticationService.registerUserWithUserRole(userDTO);
 
-        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+        return new ResponseEntity<>(apiDataResponse, HttpStatus.OK);
     }
 
     @GetMapping(path = "/login")

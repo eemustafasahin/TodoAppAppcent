@@ -1,7 +1,8 @@
 package com.sahin.app.service;
 
-import com.sahin.app.payload.ApiResponse;
-import com.sahin.app.payload.SignupRequest;
+import com.sahin.app.dto.UserDTO;
+import com.sahin.app.dto.UserDTOConverter;
+import com.sahin.app.payload.ApiDataResponse;
 import com.sahin.app.data.model.User;
 import org.springframework.stereotype.Service;
 
@@ -12,25 +13,23 @@ import org.springframework.stereotype.Service;
 public class AuthenticationService {
 
     private final UserService m_userService;
+    private final UserDTOConverter m_userDTOConverter;
 
-    public AuthenticationService(UserService userService)
+    public AuthenticationService(UserService userService, UserDTOConverter userDTOConverter)
     {
         m_userService = userService;
+        m_userDTOConverter = userDTOConverter;
     }
 
-    public ApiResponse registerWithUserRole(SignupRequest request)
+    public ApiDataResponse<UserDTO> registerUserWithUserRole(UserDTO userDTO)
     {
-        return  m_userService.signUpUser(new User(
-                request.getFirstName(),
-                request.getLastName(),
-                request.getUserName(),
-                request.getEmail(),
-                request.getPassword()));
+
+        return m_userService.saveUser(m_userDTOConverter.toUser(userDTO));
 
     }
-    public ApiResponse registerWithAdminRole(User user)
+    public ApiDataResponse<UserDTO> registerUserWithAdminRole(User user)
     {
-        return  m_userService.signUpUser(user);
+        return  m_userService.saveUser(user);
     }
 
 }

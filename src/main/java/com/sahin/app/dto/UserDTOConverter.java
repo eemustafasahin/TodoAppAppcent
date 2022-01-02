@@ -12,17 +12,28 @@ public class UserDTOConverter {
     public UserDTO toUserDTO(User user)
     {
         var userDTO = new UserDTO();
+
         userDTO.setId(user.getId());
         userDTO.setFirstname(user.getFirstname());
         userDTO.setLastname(user.getLastname());
         userDTO.setUsername(user.getUsername());
         userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword());
 
         return userDTO;
     }
 
-    public User toUserModel(UserDTO userDTO)
+    public User toUser(UserDTO userDTO)
     {
-        throw new UnsupportedOperationException("Not Implemented Yet");
+        var user = new User();
+
+        user.setFirstname(userDTO.getFirstname());
+        user.setLastname(userDTO.getLastname());
+        user.setUsername(userDTO.getUsername());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+
+        return user;
+
     }
 }

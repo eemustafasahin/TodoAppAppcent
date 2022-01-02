@@ -22,6 +22,17 @@ public class DefaultUserRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception
     {
-        m_authenticationService.registerWithAdminRole(UserFactory.create());
+        var user = UserFactory.create();
+        var defaultUserName = user.getUsername();
+        var defaultUserPassword = user.getPassword();
+
+        m_authenticationService.registerUserWithAdminRole(user);
+
+        var defaults = String.format("Default username: [%s]%nDefault password: [%s]",
+                defaultUserName,defaultUserPassword);
+        System.out.println("-------------------------------");
+        System.out.println(defaults);
+        System.out.println("-------------------------------");
+
     }
 }
