@@ -1,6 +1,7 @@
 package com.sahin.app.data.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
@@ -11,7 +12,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "todos")
-public class Todo {
+public class Todo implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +27,7 @@ public class Todo {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "completed")
-    private boolean completed;
+    private Boolean completed;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

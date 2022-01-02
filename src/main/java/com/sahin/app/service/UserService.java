@@ -6,6 +6,7 @@ import com.sahin.app.dto.UserDTO;
 import com.sahin.app.dto.UserDTOConverter;
 import com.sahin.app.payload.ApiDataResponse;
 import com.sahin.app.payload.ApiResponse;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -68,19 +69,4 @@ public class UserService implements UserDetailsService {
                 .collect(Collectors.toList());
     }
 
-    public Object getCurrentUser()
-    {
-        var currentUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (SecurityContextHolder.getContext().getAuthentication() != null &&
-                SecurityContextHolder.getContext().getAuthentication().isAuthenticated() &&
-                //when Anonymous Authentication is enabled
-                !(SecurityContextHolder.getContext().getAuthentication()
-                        instanceof AnonymousAuthenticationToken) ) {
-            User user = (User) currentUser;
-            return m_userDTOConverter.toUserDTO(user);
-        }
-
-        return "Anonymous User";
-    }
 }

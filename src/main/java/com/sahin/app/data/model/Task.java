@@ -1,13 +1,15 @@
 package com.sahin.app.data.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by M.Şahin on 01/01/2022
  */
 @Entity
 @Table(name = "tasks")
-public class Task {
+public class Task implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

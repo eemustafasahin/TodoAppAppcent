@@ -31,12 +31,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v*/*/**")
-                .permitAll()
-                .antMatchers("/*")
-                .permitAll()
+                .antMatchers("/api/*").permitAll()
+                .antMatchers("/api/v1/todos").permitAll()
+                .antMatchers("/*").permitAll()
                 .anyRequest()
-                .authenticated().and()
+                .authenticated()
+                .and()
                 .formLogin()
                 .defaultSuccessUrl("/doc");
 

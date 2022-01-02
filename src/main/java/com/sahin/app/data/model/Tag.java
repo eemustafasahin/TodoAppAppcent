@@ -1,13 +1,15 @@
 package com.sahin.app.data.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by M.Şahin on 01/01/2022
  */
 @Entity
 @Table(name = "tags")
-public class Tag {
+public class Tag implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +17,7 @@ public class Tag {
     private Long id;
 
     @Column(name = "title")
-    private String title;
+    private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "todo_id")
@@ -26,21 +28,21 @@ public class Tag {
 
     }
 
-    public Tag(String title)
+    public Tag(String name)
     {
-        this.title = title;
+        this.name = name;
     }
 
-    public Tag(Long id, String title)
+    public Tag(Long id, String name)
     {
         this.id = id;
-        this.title = title;
+        this.name = name;
     }
 
-    public Tag(Long id, String title, Todo todo)
+    public Tag(Long id, String name, Todo todo)
     {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.todo = todo;
     }
 
@@ -57,14 +59,14 @@ public class Tag {
         this.id = id;
     }
 
-    public String getTitle()
+    public String getName()
     {
-        return title;
+        return name;
     }
 
-    public void setTitle(String title)
+    public void setName(String title)
     {
-        this.title = title;
+        this.name = title;
     }
 
     public Todo getTodo()
@@ -101,6 +103,6 @@ public class Tag {
     @Override
     public String toString()
     {
-        return String.format("Category {id : %d,title : '%s'}",getId(),getTitle());
+        return String.format("Category {id : %d,title : '%s'}",getId(), getName());
     }
 }

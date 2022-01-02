@@ -1,9 +1,11 @@
 package com.sahin.app.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,6 +17,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,14 +37,18 @@ public class User implements UserDetails {
     private String email;
 
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
+    @JsonIgnore
     private Boolean locked = true;
 
+    @JsonIgnore
     private Boolean enabled = true;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
+    @JsonIgnore
     private UserRole userRole = UserRole.USER_ROLE;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
