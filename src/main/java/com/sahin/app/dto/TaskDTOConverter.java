@@ -11,6 +11,9 @@ public class TaskDTOConverter {
 
     public Task toTask(TaskDTO taskDTO)
     {
+        if (taskDTO == null)
+            return null;
+
         var task = new Task();
 
         task.setTitle(taskDTO.getTitle());
@@ -21,6 +24,9 @@ public class TaskDTOConverter {
 
     public TaskDTO toTaskDTO(Task task)
     {
+        if (task == null)
+            return null;
+
         var taskDTO = new TaskDTO();
 
         taskDTO.setId(task.getId());

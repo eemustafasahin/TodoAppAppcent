@@ -11,6 +11,9 @@ public class TagDTOConverter {
 
     public Tag toTag(TagDTO tagDTO)
     {
+        if (tagDTO == null)
+            return null;
+
         var tag = new Tag();
 
         tag.setName(tagDTO.getName());
@@ -20,6 +23,9 @@ public class TagDTOConverter {
 
     public TagDTO toTagDTO(Tag tag)
     {
+        if (tag == null)
+            return null;
+
         var tagDTO = new TagDTO();
 
         tagDTO.setId(tag.getId());

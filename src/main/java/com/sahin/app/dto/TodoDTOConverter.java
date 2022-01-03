@@ -30,6 +30,9 @@ public class TodoDTOConverter {
 
     public TodoDTO toTodoDTO(Todo todo)
     {
+        if (todo == null)
+            return null;
+
         var todoDTO = new TodoDTO();
 
         todoDTO.setId(todo.getId());
@@ -57,6 +60,9 @@ public class TodoDTOConverter {
 
     public Todo toTodo(TodoDTO todoDTO)
     {
+        if (todoDTO == null)
+            return null;
+
         var todo = new Todo();
 
         todo.setTitle(todoDTO.getTitle());

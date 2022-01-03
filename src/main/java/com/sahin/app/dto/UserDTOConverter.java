@@ -11,6 +11,9 @@ public class UserDTOConverter {
 
     public UserDTO toUserDTO(User user)
     {
+        if (user == null)
+            return null;
+
         var userDTO = new UserDTO();
 
         userDTO.setId(user.getId());
@@ -25,6 +28,9 @@ public class UserDTOConverter {
 
     public User toUser(UserDTO userDTO)
     {
+        if (userDTO == null)
+            return null;
+
         var user = new User();
 
         user.setFirstname(userDTO.getFirstname());

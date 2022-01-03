@@ -11,6 +11,9 @@ public class CategoryDTOConverter {
 
     public Category toCategory(CategoryDTO categoryDTO)
     {
+        if (categoryDTO == null)
+            return null;
+
         var category = new Category();
 
         category.setName(categoryDTO.getName());
@@ -20,6 +23,9 @@ public class CategoryDTOConverter {
 
     public CategoryDTO toCategoryDTO(Category category)
     {
+        if (category == null)
+            return null;
+
         var categoryDTO = new CategoryDTO();
 
         categoryDTO.setId(category.getId());
