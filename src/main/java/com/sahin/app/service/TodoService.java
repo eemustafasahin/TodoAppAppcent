@@ -5,6 +5,9 @@ import com.sahin.app.data.repository.*;
 import com.sahin.app.dto.*;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Created by M.Şahin on 02/01/2022
  */
@@ -36,10 +39,9 @@ public class TodoService {
         m_iTaskRepository = TaskRepository;
     }
 
-    public TodoDTO saveTodo(TodoDTO todoDTO,String principal)
+    public TodoDTO saveTodo(TodoDTO todoDTO,String principal) //needs to be update for possible duplicates
     {
         var todo = m_todoDTOConverter.toTodo(todoDTO);
-        //there is no null check
 
         todo.getTags().forEach(todo::addTag);
         todo.getTasks().forEach(todo::addTask);
@@ -56,6 +58,7 @@ public class TodoService {
     public TodoDTO updateTodo(Long id, TodoDTO todoDTO,String principal)
     {
         var todoOptional = m_todoRepository.findById(id);
+
         var todo = todoOptional.orElseThrow(() ->
                 new RuntimeException(String.format("There is no todo with %d",id)));
 
@@ -82,5 +85,32 @@ public class TodoService {
         var todoSaved = m_todoRepository.save(todo);
 
         return m_todoDTOConverter.toTodoDTO(todoSaved);
+    }
+
+    public TodoDTO getTodoById(Long id)
+    {
+        return m_todoRepository.findById(id).map(m_todoDTOConverter::toTodoDTO).orElse(null);
+    }
+
+    public List<TodoDTO> getAllTodos()
+    {
+        return m_todoRepository.findAll()
+                .stream()
+                .map(m_todoDTOConverter::toTodoDTO)
+                .collect(Collectors.toList());
+    }
+
+    public TodoDTO deleteTodo(Long id)
+    {
+        var todoOpt=  m_todoRepository.findById(id);
+
+        if (todoOpt.isPresent()) {
+            var todoDeleted = todoOpt.get();
+            todoDeleted.removeCategories();
+            m_todoRepository.delete(todoDeleted);
+            return m_todoDTOConverter.toTodoDTO(todoDeleted);
+
+        }
+            return null;
     }
 }
