@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 /**
  * Created by M.Şahin on 01/01/2022
  */
-@JsonPropertyOrder({ // look for getters camelCase names
+@JsonPropertyOrder({ // look for getters lower camelCase names
         "success",
         "message",
         "httpStatus"

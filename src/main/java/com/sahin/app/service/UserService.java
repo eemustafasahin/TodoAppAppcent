@@ -69,4 +69,11 @@ public class UserService implements UserDetailsService {
                 .collect(Collectors.toList());
     }
 
+    public UserDTO findUserById(Long id)
+    {
+        var userOpt = m_userRepository.findById(id);
+
+        return userOpt.map(m_userDTOConverter::toUserDTO).orElse(null);
+    }
+
 }

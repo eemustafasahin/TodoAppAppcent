@@ -3,8 +3,6 @@ package com.sahin.app.dto;
 import com.sahin.app.data.model.Todo;
 import org.springframework.stereotype.Component;
 
-import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -38,18 +36,19 @@ public class TodoDTOConverter {
         todoDTO.setId(todo.getId());
         todoDTO.setTitle(todo.getTitle());
         todoDTO.setCreatedAt(todo.getCreatedAt());
+        todoDTO.setCompleted(todo.isCompleted());
         todoDTO.setUserDTO(m_userDTOConverter.toUserDTO(todo.getUser()));
-        todoDTO.setTaskDTOSet(todo.getTasks()
+        todoDTO.setTaskDTOs(todo.getTasks()
                 .stream()
                 .filter(Objects::nonNull)
                 .map(m_taskDTOConverter::toTaskDTO)
                 .collect(Collectors.toSet()));
-        todoDTO.setTagDTOSet(todo.getTags()
+        todoDTO.setTagDTOs(todo.getTags()
                 .stream()
                 .filter(Objects::nonNull)
                 .map(m_tagDTOConverter::toTagDTO)
                 .collect(Collectors.toSet()));
-        todoDTO.setCategoryDTOSet(todo.getCategories()
+        todoDTO.setCategoryDTOs(todo.getCategories()
                 .stream()
                 .filter(Objects::nonNull)
                 .map(m_categoryDTOConverter::toCategoryDTO)
@@ -67,16 +66,21 @@ public class TodoDTOConverter {
 
         todo.setTitle(todoDTO.getTitle());
         todo.setCompleted(todoDTO.getCompleted());
-        todo.setTasks(todoDTO.getTaskDTOSet()
+        todo.setUser(m_userDTOConverter.toUser(todoDTO.getUserDTO()));
+
+        todo.setTasks(todoDTO.getTaskDTOs()
                 .stream()
                 .filter(Objects::nonNull)
                 .map(m_taskDTOConverter::toTask)
                 .collect(Collectors.toSet()));
-        todo.setTags(todoDTO.getTagDTOSet()
+
+        todo.setTags(todoDTO.getTagDTOs()
                 .stream()
                 .filter(Objects::nonNull)
-                .map(m_tagDTOConverter::toTag).collect(Collectors.toSet()));
-        todo.setCategories(todoDTO.getCategoryDTOSet()
+                .map(m_tagDTOConverter::toTag)
+                .collect(Collectors.toSet()));
+
+        todo.setCategories(todoDTO.getCategoryDTOs()
                 .stream()
                 .filter(Objects::nonNull)
                 .map(m_categoryDTOConverter::toCategory)

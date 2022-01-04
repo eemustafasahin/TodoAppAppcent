@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
  * Created by M.Şahin on 01/01/2022
  */
 @Component
+
 public class UserDTOConverter {
 
     public UserDTO toUserDTO(User user)

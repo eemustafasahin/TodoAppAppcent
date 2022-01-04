@@ -39,7 +39,7 @@ public class Todo implements Serializable {
     @OneToMany(mappedBy = "todo", cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Tag> tags = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = { CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(name = "task_categories",
             joinColumns = @JoinColumn(name = "todo_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
@@ -119,7 +119,7 @@ public class Todo implements Serializable {
         tags.remove(tag);
     }
 
-    public void removeTag()
+    public void removeTags()
     {
         tags.forEach(this::removeTag);
     }

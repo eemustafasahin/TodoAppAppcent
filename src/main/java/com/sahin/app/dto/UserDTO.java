@@ -1,10 +1,13 @@
 package com.sahin.app.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Created by M.Şahin on 01/01/2022
  */
+@JsonPropertyOrder({"id","firstname","lastname","username","email","password"})
 public class UserDTO {
     private Long m_id;
     private String m_username;
@@ -13,7 +16,7 @@ public class UserDTO {
     private String m_email;
     private String m_password;
 
-
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public Long getId()
     {
         return m_id;
@@ -24,6 +27,7 @@ public class UserDTO {
         m_id = id;
     }
 
+    @Schema(example = "tuzludondurma")
     public String getUsername()
     {
         return m_username;
@@ -34,6 +38,7 @@ public class UserDTO {
         m_username = username;
     }
 
+    @Schema(example = "mustafa")
     public String getFirstname()
     {
         return m_firstname;
@@ -44,6 +49,7 @@ public class UserDTO {
         m_firstname = firstname;
     }
 
+    @Schema(example = "şahin")
     public String getLastname()
     {
         return m_lastname;
@@ -54,6 +60,7 @@ public class UserDTO {
         m_lastname = lastname;
     }
 
+    @Schema(example = "mustafasahin@springboot.com")
     public String getEmail()
     {
         return m_email;
@@ -64,6 +71,7 @@ public class UserDTO {
         m_email = email;
     }
 
+    @Schema(example = "password")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public String getPassword()
     {

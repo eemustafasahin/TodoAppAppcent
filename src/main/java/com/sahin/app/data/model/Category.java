@@ -2,6 +2,7 @@ package com.sahin.app.data.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -21,7 +22,7 @@ public class Category implements Serializable {
     private String name;
 
     @ManyToMany(mappedBy = "categories")
-    private Set<Todo> todos;
+    private Set<Todo> todos = new HashSet<>();
 
     public Category()
     {
