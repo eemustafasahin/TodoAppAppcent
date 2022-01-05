@@ -47,12 +47,11 @@ public class TodoService {
         todo.getTasks().forEach(todo::addTask);
 
         var currentUser = m_userRepository.findByUsername(principal);
-
         currentUser.orElseThrow(RuntimeException::new).addTodo(todo);
 
-        var savedUser = m_userRepository.save(currentUser.get());
+        var savedTodo = m_todoRepository.save(todo);
 
-        return m_todoDTOConverter.toTodoDTO(m_todoRepository.getByUser(savedUser));
+        return m_todoDTOConverter.toTodoDTO(savedTodo);
     }
 
     public TodoDTO updateTodo(Long id, TodoDTO todoDTO,String principal)

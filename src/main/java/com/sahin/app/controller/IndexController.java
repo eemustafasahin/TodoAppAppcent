@@ -21,15 +21,16 @@ public class IndexController {
         m_httpServletResponse = httpServletResponse;
     }
 
+    @GetMapping(path = "/doc")
+    public void docPage() throws Exception
+    {
+        m_httpServletResponse.sendRedirect("/swagger-ui.html");
+    }
+
     @GetMapping(path = "/")
     public void home() throws Exception
     {
         m_httpServletResponse.sendRedirect("/swagger-ui.html");
     }
 
-    @GetMapping(path = "/doc")
-    public void docPage() throws Exception
-    {
-        m_httpServletResponse.sendRedirect("/swagger-ui.html");
-    }
 }

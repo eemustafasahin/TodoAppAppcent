@@ -25,18 +25,18 @@ public class AuthenticationController {
         m_authenticationService = authenticationService;
     }
 
+    @GetMapping(path = "/login")
+    public void login() throws Exception
+    {
+        m_httpServletResponse.sendRedirect("http://localhost:8080/login");
+    }
+
     @PostMapping(path = "/signup")
     public ResponseEntity<ApiDataResponse<UserDTO>> register(@RequestBody UserDTO userDTO)
     {
         var apiDataResponse = m_authenticationService.registerUserWithUserRole(userDTO);
 
         return new ResponseEntity<>(apiDataResponse, HttpStatus.OK);
-    }
-
-    @GetMapping(path = "/login")
-    public void login() throws Exception
-    {
-        m_httpServletResponse.sendRedirect("http://localhost:8080/login");
     }
 
 }

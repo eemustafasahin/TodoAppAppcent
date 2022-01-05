@@ -51,15 +51,10 @@ public class TodoController {
     @PostMapping("/add")
     public ResponseEntity<ApiDataResponse<TodoDTO>> addTodo(@RequestBody TodoDTO todoDTO)
     {
-        try {
             var userName = SecurityContextHolder.getContext().getAuthentication().getName();
             var savedTodoDTO = m_todoService.saveTodo(todoDTO,userName);
 
             return new ResponseEntity<>(new ApiDataResponse<>(savedTodoDTO,Boolean.TRUE,"Todo added successfully"), HttpStatus.OK);
-
-        } catch (Throwable ignored) {
-            return new ResponseEntity<>(new ApiDataResponse<>(new TodoDTO(),Boolean.FALSE,"Todo could not be added"),HttpStatus.BAD_REQUEST);
-        }
     }
 
     @PutMapping("/update/todoId")
