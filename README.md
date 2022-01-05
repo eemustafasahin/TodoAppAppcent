@@ -39,7 +39,7 @@ You can also access application with default user info:
 Username: springboot
 Password: HelloSpring
 ```
-[AppcentTodoApplication](https://appcentherokutodoapp.herokuapp.com/)
+[appcentherokutodoapp.herokuapp.com](https://appcentherokutodoapp.herokuapp.com/)
 
 ### To work with Todo Application
 
