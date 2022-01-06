@@ -5,7 +5,7 @@ This application provides a RESTful api. There is no UI except for basic login p
 
 Application ER Model
 
-![Todo App ER Model](https://github.com/eemustafasahin/images/blob/8358873550282ae756417c16a4f7e3b0dd2cad0a/diagram.png)
+![Todo App ER Model](./diagram.png)
 
 ### **RUN TODO APPLICATION**
 
