@@ -50,25 +50,7 @@ Git
 Java 11
 ```
 
-### application.properties
-```
-#local db source properties
-#spring.datasource.url=jdbc:postgresql://localhost:5432/moviedb
-#spring.datasource.username=postgres
-#spring.datasource.password=394887
 
-### amazon aws postgre features
-spring.datasource.url=jdbc:postgresql://database-1.cuyy6svg1afz.eu-central-1.rds.amazonaws.com:5432/todoappdb
-spring.datasource.username=postgres
-spring.datasource.password=Csd394887
-
-### embedded H2 features
-#spring.h2.console.enabled=true
-#spring.datasource.url=jdbc:h2:mem:todoappdb
-#spring.datasource.driverClassName=org.h2.Driver
-#spring.datasource.username=sa
-#spring.datasource.password=
-#spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 
 
 ### jpa & hibernate
